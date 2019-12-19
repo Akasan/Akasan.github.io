@@ -90,6 +90,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="tl-dr"><a href="#tl-dr" class="headerlink" title="tl;dr"></a>tl;dr</h1><p>とにかくディープラーニングはじめた人が絶対やるであろうMNISTのClassificationをいまさらながらちゃんとやって記事にした</p>
+<h1 id="やってみたこと"><a href="#やってみたこと" class="headerlink" title="やってみたこと"></a>やってみたこと</h1><p>今回は、Kerasで作成した単純なモデルでMNISTを分類するタスクをしてみました。<br>あくまでも簡単に検証したいだけだったので、学習率などのパラメータは特に調整せず、Kerasのデフォルトを利用しています。<br>なお、今回はオプティマイザーを以下の四種類使ってみました</p>
+<ul>
+<li>SGD</li>
+<li>Adam</li>
+<li>Adadelta</li>
+<li>RMSprop</li>
+</ul>
+<h1 id="ソースコード"><a href="#ソースコード" class="headerlink" title="ソースコード"></a>ソースコード</h1><p>今回のソースコード は以下になります。(後々githubの方にrepoを作成する予定です)</p>
 <details><summary>サンプルコード</summary><div>
 \```python
 import numpy as np
@@ -97,8 +105,10 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.datasets import mnist
 from keras.utils import np_utils
+import matplotlib.pyplot as plt
 
-<p>CLASS_NUM = 10<br>EPOCHS = 10<br>BATCH_SIZE = 128<br>VERBOSE = True</p>
+<p>CLASS_NUM = 10<br>EPOCHS = 5<br>BATCH_SIZE = 128<br>VERBOSE = True</p>
+<p>history_optim = {“sgd”: None, “adam”: None, “adadelta”: None, “rmsprop”: None,}<br>score_optim = {“sgd”: None, “adam”: None, “adadelta”: None, “rmsprop”: None,}</p>
 <p>def generate_data():<br>    “”” generate dataset”””<br>    (x_train, y_train), (x_test, y_test) = mnist.load_data()<br>    x_train = x_train.astype(np.float32) / 255.0<br>    x_test = x_test.astype(np.float32) / 255.0<br>    x_train = x_train.reshape(-1, 28 * 28)<br>    x_test = x_test.reshape(-1, 28 * 28)        </p>
 <pre><code>y_train = np_utils.to_categorical(y_train, CLASS_NUM)
 y_test = np_utils.to_categorical(y_test, CLASS_NUM)
@@ -120,8 +130,12 @@ model.add(Activation(&quot;relu&quot;))
 model.add(Dense(CLASS_NUM))
 model.add(Activation(&quot;softmax&quot;))
 model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
-return model</code></pre><p>train, test = generate_data()<br>model = generate_model()<br>history = model.fit(train[0], train[1], epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=VERBOSE)<br>score = model.evaluate(test[0], test[1], verbose=VERBOSE)<br>print(f”train loss: {score[0]:.3f}”)<br>print(f”train accuracy: {score[1]: .3f}”)<br>```</p>
+return model</code></pre><p>plt.figure()<br>train, test = generate_data()<br>for k in history_optim.keys():<br>    print(f”optimizer : {k}”)<br>    model = generate_model(optimizer=k)<br>    history_optim[k] = model.fit(train[0], train[1], epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=VERBOSE)<br>    score_optim[k] = model.evaluate(test[0], test[1], verbose=VERBOSE)<br>    print(f”train loss: {score_optim[k][0]:.3f}”)<br>    print(f”train accuracy: {score_optim[k][1]: .3f}”)<br>    plt.plot(history_optim[k].history[“accuracy”], label=f”{k}”)</p>
+<p>plt.legend()<br>plt.grid()<br>plt.show()<br>```</p>
 </div></details>
+
+<h1 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h1><p>MNISTは簡単なタスクなので、数エポック実行しただけでかなり高精度になるため、5エポックだけにしました。<br>トレーニング時の精度は次のような感じで推移しました。</p>
+<img src="./result.jpg" alt="MNIST RESULT" title="MNIST RESULT">
 
       
     </div>
