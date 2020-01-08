@@ -63,6 +63,83 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linuxコマンド-grep編①" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/" class="article-date">
+  <time datetime="2020-01-08T11:13:15.000Z" itemprop="datePublished">2020-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/">Linuxコマンド -grep編①-</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="tl-dr"><a href="#tl-dr" class="headerlink" title="tl;dr"></a>tl;dr</h1><p>Linuxのgrepコマンド(以下, grep)の使い方をまとめてみる。</p>
+<h1 id="grepコマンド"><a href="#grepコマンド" class="headerlink" title="grepコマンド"></a>grepコマンド</h1><p>grepコマンドは、ファイル内の文字列を検索するためのコマンドです。<br>個人的には、プログラミングしてるときに、同じ関数がどのファイルで呼ばれているかを調べるのに使ったりしています。</p>
+<h1 id="簡単な使い方"><a href="#簡単な使い方" class="headerlink" title="簡単な使い方"></a>簡単な使い方</h1><p>grepの基本構成はこんな感じです</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">grep &lt;option&gt; &lt;pattern&gt; &lt;filepath&gt;</span></pre></td></tr></table></figure>
+
+<p>なお、各要素はこんな感じの意味です。</p>
+<ul>
+<li><option>
+
+<p>オプションを指定する</p>
+<p>例えば、単語について検索したい場合は<code>-w</code>をつける</p>
+</li>
+<li><pattern>
+
+<p>検索したいワードを書く</p>
+</li>
+<li><filepath>
+
+<p>検索したいファイルのパスを指定する</p>
+</li>
+</ul>
+<p>例えば、<code>hoge.txt</code>がこんな感じだとする。</p>
+<blockquote>
+<p>I am hoge</p>
+<p>I am Hoge</p>
+<p>I am hoGe</p>
+<p>I am HoGe</p>
+<p>I am HOGE</p>
+</blockquote>
+<p>この時、<code>hoge</code>という単語を検索する場合、次のように指定する（-wオプションは付けなくてもいい）。</p>
+<p><code>grep -w hoge hoge.txt</code></p>
+<p>その結果、<code>I am hoge</code>という結果が返ってくる。</p>
+<p>次に、例えば大文字と小文字を無視して検索したい場合は<code>-i</code>または<code>--ignore-case</code>オプションをつける。</p>
+<p><code>grep -i hoge hoge.txt</code>または<code>grep --ignore-case hoge hoge.txt</code></p>
+<p>その結果、<code>hoge.txt</code>の全ての行が結果として返ってくる。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/" data-id="ck558135q0000jc0wasifhrs6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-bash/" rel="tag">Linux bash</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Pythonで画像処理-OpenCV-基礎①" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/19/Python%E3%81%A7%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86-OpenCV-%E5%9F%BA%E7%A4%8E%E2%91%A0/" class="article-date">
@@ -251,7 +328,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/">作ってみた</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86/">画像処理</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/">作ってみた</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86/">画像処理</a></li></ul>
     </div>
   </div>
 
@@ -261,7 +338,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-bash/" rel="tag">Linux bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
     </div>
   </div>
 
@@ -271,7 +348,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+      <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/Linux-bash/" style="font-size: 10px;">Linux bash</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
     </div>
   </div>
 
@@ -280,7 +357,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
     </div>
   </div>
 
@@ -291,6 +368,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/">Linuxコマンド -grep編①-</a>
+          </li>
         
           <li>
             <a href="/2019/12/19/Python%E3%81%A7%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86-OpenCV-%E5%9F%BA%E7%A4%8E%E2%91%A0/">Pythonで画像処理(OpenCV) -基礎① -</a>
@@ -331,7 +412,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 Akagawa Daisuke<br>
+      &copy; 2020 Akagawa Daisuke<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
