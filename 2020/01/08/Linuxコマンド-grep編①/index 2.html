@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Linuxコマンド -grep編①- | HOGEHOGE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="tl;drLinuxのgrepコマンド(以下, grep)の使い方をまとめてみる。 grepコマンドgrepコマンドは、ファイル内の文字列を検索するためのコマンドです。個人的には、プログラミングしてるときに、同じ関数がどのファイルで呼ばれているかを調べるのに使ったりしています。 簡単な使い方grepの基本構成はこんな感じです 1grep &lt;option&gt; &lt;pattern&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linuxコマンド -grep編①-">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;08&#x2F;Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0&#x2F;index.html">
+<meta property="og:site_name" content="HOGEHOGE">
+<meta property="og:description" content="tl;drLinuxのgrepコマンド(以下, grep)の使い方をまとめてみる。 grepコマンドgrepコマンドは、ファイル内の文字列を検索するためのコマンドです。個人的には、プログラミングしてるときに、同じ関数がどのファイルで呼ばれているかを調べるのに使ったりしています。 簡単な使い方grepの基本構成はこんな感じです 1grep &lt;option&gt; &lt;pattern&gt;">
+<meta property="article:published_time" content="2020-01-08T11:13:15.000Z">
+<meta property="article:modified_time" content="2020-01-09T13:30:43.761Z">
+<meta property="article:author" content="Akagawa Daisuke">
+<meta property="article:tag" content="Linux bash">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="HOGEHOGE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HOGEHOGE</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linuxコマンド-grep編①" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/" class="article-date">
+  <time datetime="2020-01-08T11:13:15.000Z" itemprop="datePublished">2020-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linuxコマンド -grep編①-
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="tl-dr"><a href="#tl-dr" class="headerlink" title="tl;dr"></a>tl;dr</h1><p>Linuxのgrepコマンド(以下, grep)の使い方をまとめてみる。</p>
+<h1 id="grepコマンド"><a href="#grepコマンド" class="headerlink" title="grepコマンド"></a>grepコマンド</h1><p>grepコマンドは、ファイル内の文字列を検索するためのコマンドです。<br>個人的には、プログラミングしてるときに、同じ関数がどのファイルで呼ばれているかを調べるのに使ったりしています。</p>
+<h1 id="簡単な使い方"><a href="#簡単な使い方" class="headerlink" title="簡単な使い方"></a>簡単な使い方</h1><p>grepの基本構成はこんな感じです</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">grep &lt;option&gt; &lt;pattern&gt; &lt;filepath&gt;</span></pre></td></tr></table></figure>
+
+<p>なお、各要素はこんな感じの意味です。</p>
+<ul>
+<li><p><code>&lt;option&gt;</code></p>
+<p>オプションを指定する</p>
+<p>例えば、単語について検索したい場合は<code>-w</code>をつける</p>
+</li>
+<li><p><code>&lt;pattern&gt;</code></p>
+<p>検索したいワードを書く</p>
+</li>
+<li><p><code>&lt;filepath&gt;</code></p>
+<p>検索したいファイルのパスを指定する</p>
+</li>
+</ul>
+<p>例えば、<code>hoge.txt</code>がこんな感じだとする。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">I am hoge</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">I am Hoge</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">I am hoGe</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">I am HoGe</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">I am HOGE</span></pre></td></tr></table></figure>
+
+<p>この時、<code>hoge</code>という単語を検索する場合、次のように指定する（-wオプションは付けなくてもいい）。</p>
+<p><code>grep -w hoge hoge.txt</code></p>
+<p>その結果、<code>I am hoge</code>という結果が返ってくる。</p>
+<p>次に、例えば大文字と小文字を無視して検索したい場合は<code>-i</code>または<code>--ignore-case</code>オプションをつける。</p>
+<p><code>grep -i hoge hoge.txt</code>または<code>grep --ignore-case hoge hoge.txt</code></p>
+<p>その結果、<code>hoge.txt</code>の全ての行が結果として返ってくる。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/" data-id="ck558135q0000jc0wasifhrs6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-bash/" rel="tag">Linux bash</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/09/Titanic%E7%94%9F%E5%AD%98%E8%80%85%E4%BA%88%E6%B8%AC-%E6%B1%BA%E5%AE%9A%E6%9C%A8%E3%83%99%E3%83%BC%E3%82%B9%E6%89%8B%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Titanic生存者予測 - 決定木ベース手法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/19/Python%E3%81%A7%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86-OpenCV-%E5%9F%BA%E7%A4%8E%E2%91%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Pythonで画像処理(OpenCV) -基礎① -</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python-machine-learning-kaggle/">python machine learning kaggle</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/">作ってみた</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86/">画像処理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-bash/" rel="tag">Linux bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-sklearn-kaggle/" rel="tag">python sklearn kaggle</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/Linux-bash/" style="font-size: 10px;">Linux bash</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-sklearn-kaggle/" style="font-size: 10px;">python sklearn kaggle</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/09/Titanic%E7%94%9F%E5%AD%98%E8%80%85%E4%BA%88%E6%B8%AC-%E6%B1%BA%E5%AE%9A%E6%9C%A8%E3%83%99%E3%83%BC%E3%82%B9%E6%89%8B%E6%B3%95/">Titanic生存者予測 - 決定木ベース手法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/08/Linux%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-grep%E7%B7%A8%E2%91%A0/">Linuxコマンド -grep編①-</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/19/Python%E3%81%A7%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86-OpenCV-%E5%9F%BA%E7%A4%8E%E2%91%A0/">Pythonで画像処理(OpenCV) -基礎① -</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/19/Python%E3%81%A7%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F-OverloadManager/">Pythonで作ってみた ~OverloadManager-</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/19/simple-keras-mnist/">simple-keras-mnist</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">profile</h3>
+    <div class="widget profile">
+      <!-- 190528 profile追加 -->
+      <div>
+        <span class="b" style="color:rgb(23, 196, 0);">Python</span>などでツールを開発しています。<br>
+        <ul>
+        <li><i class="fab fa-twitter"></i> <a href="https://twitter.com/leon_dai" target="_blank" rel="noopener">Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Akagawa Daisuke<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
