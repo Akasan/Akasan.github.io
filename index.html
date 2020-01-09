@@ -96,28 +96,20 @@
 
 <p>なお、各要素はこんな感じの意味です。</p>
 <ul>
-<li><option>
-
+<li><p><code>&lt;option&gt;</code></p>
 <p>オプションを指定する</p>
 <p>例えば、単語について検索したい場合は<code>-w</code>をつける</p>
 </li>
-<li><pattern>
-
+<li><p><code>&lt;pattern&gt;</code></p>
 <p>検索したいワードを書く</p>
 </li>
-<li><filepath>
-
+<li><p><code>&lt;filepath&gt;</code></p>
 <p>検索したいファイルのパスを指定する</p>
 </li>
 </ul>
 <p>例えば、<code>hoge.txt</code>がこんな感じだとする。</p>
-<blockquote>
-<p>I am hoge</p>
-<p>I am Hoge</p>
-<p>I am hoGe</p>
-<p>I am HoGe</p>
-<p>I am HOGE</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">I am hoge</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">I am Hoge</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">I am hoGe</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">I am HoGe</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">I am HOGE</span></pre></td></tr></table></figure>
+
 <p>この時、<code>hoge</code>という単語を検索する場合、次のように指定する（-wオプションは付けなくてもいい）。</p>
 <p><code>grep -w hoge hoge.txt</code></p>
 <p>その結果、<code>I am hoge</code>という結果が返ってくる。</p>
